@@ -1,0 +1,28 @@
+{
+  "name": "layer-manager-plugin",
+  "version": "1.0.0",
+  "description": "Manages map layers and emits layer events",
+  "main": "index.js",
+  "manifest_version": 1,
+  "permissions": [
+    "panels.right.create",
+    "events.layer.emit"
+  ],
+  "dependencies": {
+    "required": [],
+    "optional": []
+  },
+  "contributes": {
+    "panels": {
+      "right": {
+        "component": "LayerManagerComponent"
+      }
+    },
+    "events": {
+      "emits": ["layer.clicked", "layer.selected"]
+    }
+  },
+  "activation_events": [
+    "onStartup"
+  ]
+}

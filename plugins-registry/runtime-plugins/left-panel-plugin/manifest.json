@@ -1,0 +1,13 @@
+{
+  "name": "left-panel-plugin",
+  "version": "1.0.0",
+  "description": "Adds content to the left panel",
+  "main": "index.js",
+  "contributes": {
+    "panels": {
+      "left": {
+        "component": "LeftPanelPlugin"
+      }
+    }
+  }
+}
