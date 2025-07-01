@@ -1,0 +1,24 @@
+{
+    "name": "fire-recorder-plugin",
+    "version": "1.0.0",
+    "main": "dist/index.js",
+    "scripts": { "build": "webpack" },
+    "dependencies": {
+      "react": "^18.0.0",
+      "react-dom": "^18.0.0",
+      "webm-writer": "^0.3.0",
+      "@loaders.gl/video": "^3.0.0",
+      "date-fns": "^2.0.0"
+    },
+    "devDependencies": {
+      "webpack": "^5",
+      "webpack-cli": "^5",
+      "babel-loader": "^9",
+      "@babel/core": "^7",
+      "@babel/preset-env": "^7",
+      "@babel/preset-react": "^7",
+      "@babel/preset-typescript": "^7",
+      "typescript": "^5"
+    }
+  }
+  

@@ -1,0 +1,13 @@
+{
+  "name": "map-click-details-plugin",
+  "version": "1.0.0",
+  "description": "Shows map click details in the left panel",
+  "main": "index.js",
+  "contributes": {
+    "panels": {
+      "left": {
+        "component": "MapClickDetailsPlugin"
+      }
+    }
+  }
+} 

@@ -1,0 +1,107 @@
+import React, { useState, useRef, useCallback } from 'react';
+import WebMWriter from 'webm-writer';
+
+export default function FireRecorder() {
+  const [recording, setRecording] = useState(false);
+  const writerRef = useRef<WebMWriter | null>(null);
+  const framesRef = useRef<HTMLCanvasElement[]>([]);
+  const intervalRef = useRef<number | null>(null);
+  const canvasId = 'deckgl-overlay';
+  console.log("i am loaded")
+
+  const captureFrame = useCallback(() => {
+    const mapCanvas = document.querySelector('canvas.mapboxgl-canvas') as HTMLCanvasElement | null;
+    const deckCanvas = document.getElementById(canvasId) as HTMLCanvasElement | null;
+
+    if (!mapCanvas || !deckCanvas) {
+      console.log('Missing canvases');
+      return;
+    }
+
+    const width = mapCanvas.width;
+    const height = mapCanvas.height;
+
+    const c = document.createElement('canvas');
+    c.width = width;
+    c.height = height;
+    const ctx = c.getContext('2d', { alpha: false });
+    if (!ctx) return;
+
+    ctx.clearRect(0, 0, width, height);
+    ctx.drawImage(mapCanvas, 0, 0, width, height);
+    ctx.drawImage(deckCanvas, 0, 0, width, height);
+
+    if (writerRef.current) {
+      writerRef.current.addFrame(c);
+      framesRef.current.push(c);
+      console.log('Frame captured:', framesRef.current.length);
+    }
+  }, []);
+
+  const startRecording = () => {
+    writerRef.current = new WebMWriter({
+      quality: 0.95,
+      frameRate: 1,
+      transparent: false
+    });
+    framesRef.current = [];
+    setRecording(true);
+
+    intervalRef.current = window.setInterval(() => {
+      captureFrame();
+    }, 2000); //every 2s
+  };
+
+  const stopRecording = async () => {
+    setRecording(false);
+    if (intervalRef.current) {
+      clearInterval(intervalRef.current);
+      intervalRef.current = null;
+    }
+
+    if (!writerRef.current) return;
+
+    const blob = await writerRef.current.complete();
+    const url = URL.createObjectURL(blob);
+    const a = document.createElement('a');
+    a.href = url;
+    a.download = `recording-${Date.now()}.webm`;
+    document.body.appendChild(a);
+    a.click();
+    document.body.removeChild(a);
+
+    writerRef.current = null;
+    framesRef.current = [];
+  };
+
+  return (
+    <div style={{ padding: '8px', background:'#ffe3e0', marginTop: '16px', borderRadius:'6px' }}>
+      <h5 style={{ display: 'flex', alignItems: 'center', gap: '8px' }}>
+        Fire Recorder Component Plugin
+        {recording && (
+          <span style={{
+            width: '12px',
+            height: '12px',
+            borderRadius: '50%',
+            backgroundColor: 'red',
+            animation: 'blinker 1s infinite',
+            display: 'inline-block'
+          }} />
+        )}
+      </h5>
+
+      <div style={{ display: 'flex', flexDirection: 'row', gap: '5px' }}>
+        <button onClick={recording ? stopRecording : startRecording}>
+          {recording ? '🛑 Stop Recording' : '🎥 Start Recording'}
+        </button>
+      </div>
+
+      {/* Add animation style */}
+      <style>{`
+        @keyframes blinker {
+          50% { opacity: 0; }
+        }
+      `}</style>
+    </div>
+  );
+}

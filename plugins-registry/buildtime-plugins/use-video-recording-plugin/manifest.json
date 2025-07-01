@@ -1,0 +1,19 @@
+{
+    "name": "fire-recorder-plugin",
+    "version": "1.0.0",
+    "description": "Records deck.gl canvas to WebM/GIF",
+    "main": "src/index.tsx",
+    "permissions": ["panels.left.create"],
+    "contributes": {
+      "panels": {
+        "left": {
+          "component": "FireRecorderPanel"
+        }
+      }
+    },
+    "activation_events": ["onAppStart"],
+    "dependencies": {
+      "webm-writer": "^0.3.0"
+    }
+  }
+  
