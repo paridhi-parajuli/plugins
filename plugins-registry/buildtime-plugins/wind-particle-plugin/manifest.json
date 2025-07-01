@@ -1,0 +1,41 @@
+{
+  "name": "wind-particle-plugin",
+  "version": "1.0.0",
+  "type": "static",
+  "description": "Adds a wind particle layer to the map",
+  "main": "index.js",
+  "contributes": {
+    "layers": [
+      {
+        "id": "wind-particles",
+        "factory": "createWindLayer"
+      }
+    ]
+  },
+  "configSchema": {
+    "type": "object",
+    "properties": {
+      "timeRangeEnd": {
+        "type": "string",
+        "format": "date-time",
+        "title": "Time Range End"
+      },
+      "particleCount": {
+        "type": "number",
+        "default": 2000,
+        "title": "Particle Count"
+      },
+      "speedFactor": {
+        "type": "number",
+        "default": 10,
+        "title": "Speed Factor"
+      },
+      "opacity": {
+        "type": "number",
+        "default": 92,
+        "title": "Opacity"
+      }
+    },
+    "required": ["timeRangeEnd"]
+  }
+}
