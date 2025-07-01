@@ -15,16 +15,28 @@ const pluginTheme = createTheme({
   },
 });
 
+type Dataset = {
+  id: string;
+  name: string;
+  description: string;
+  category: string;
+  type: string;
+  url: string;
+};
 
-export function DatasetManagerPanelComponent(): HTMLElement {
+type DatasetManagerConfig = {
+  datasets: Dataset[];
+};
+
+export function DatasetManagerPanelComponent(config: DatasetManagerConfig): HTMLElement {
   const container = document.createElement('div');
   const root = createRoot(container);
-
+  console.log(config)
   root.render(
     <React.StrictMode>
       <ThemeProvider theme={pluginTheme}>
         <CssBaseline />
-        <DatasetManager />
+        <DatasetManager datasets={config.datasets || []}/>
       </ThemeProvider>
     </React.StrictMode>
   );

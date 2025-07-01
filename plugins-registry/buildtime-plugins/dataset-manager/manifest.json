@@ -1,21 +1,65 @@
 {
-    "name": "dataset-manager-plugin",
-    "version": "1.0.0",
-    "description": "Manages all available and active datasets",
-    "main": "index.tsx",
-    "permissions": ["panels.right.create"],
-    "contributes": {
-      "panels": {
-        "right": {
-          "component": "DatasetManagerPanelComponent"
-        }
+  "name": "dataset-manager-plugin",
+  "version": "1.0.0",
+  "description": "Manages all available and active datasets",
+  "main": "index.tsx",
+  "permissions": ["panels.right.create"],
+  "contributes": {
+    "panels": {
+      "right": {
+        "component": "DatasetManagerPanelComponent"
+      }
+    }
+  },
+  "activation_events": ["onAppStart"],
+  "dependencies": {
+    "@emotion/react": "^11.11.x",
+    "@emotion/styled": "^11.11.x",
+    "@math.gl/core": "^4.1.0",
+    "@mui/material": "^5.15.x"
+  },
+  "configSchema": {
+    "type": "object",
+    "properties": {
+      "datasets": {
+        "type": "array",
+        "title": "Available Datasets",
+        "items": {
+          "type": "object",
+          "properties": {
+            "id": { "type": "string", "title": "ID" },
+            "name": { "type": "string", "title": "Name" },
+            "description": { "type": "string", "title": "Description" },
+            "type": { "type": "string", "title": "Type" },
+            "url": { "type": "string", "title": "URL" }
+          },
+          "required": ["id", "name", "type", "url"]
+        },
+        "default": [
+          {
+            "id": "public.aqs_gases_metadata",
+            "name": "AQS Stations",
+            "description": "Air Quality System monitoring stations",
+            "type": "feature",
+            "url": "https://example.com/modis_chlorophyll.tif"
+          },
+          {
+            "id": "dataset2",
+            "name": "Another dataset",
+            "description": "Description for another daraset",
+            "type": "vector",
+            "url": "https://example.com/argo_floats.geojson"
+          },
+          {
+            "id": "omi-no2-2d",
+            "name": "OMI-2D",
+            "description": "Ozone Monitoring Instrument NO2 data",
+            "type": "raster",
+            "url": "/path/to/thumbnail1.jpg"
+          }
+        ]
       }
     },
-    "activation_events": ["onAppStart"],
-    "dependencies":{
-      "@emotion/react": "^11.11.x",
-    "@emotion/styled": "^11.11.x",
-    "@mui/material": "^5.15.x"
-      }
+    "required": ["datasets"]
   }
-  
+}
