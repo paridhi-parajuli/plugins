@@ -1,5 +1,5 @@
 {
-  "name": "dataset-manager-plugin",
+  "name": "dataset-manager",
   "version": "1.0.0",
   "description": "Manages all available and active datasets",
   "main": "index.tsx",
