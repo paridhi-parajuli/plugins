@@ -9,5 +9,24 @@
           "component": "TitlePlugin"
         }
       }
+    },
+    "configSchema": {
+      "type": "object",
+      "properties": {
+        "logoUrl": {
+          "type": "string",
+          "description": "URL to the logo image"
+        },
+        "title": {
+          "type": "string",
+          "description": "Title to display"
+        },
+        "description": {
+          "type": "string",
+          "description": "Optional description",
+          "nullable": true
+        }
+      },
+      "required": ["logoUrl", "title"]
     }
   }
