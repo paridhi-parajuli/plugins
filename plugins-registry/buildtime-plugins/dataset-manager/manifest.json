@@ -16,7 +16,8 @@
     "@emotion/react": "^11.11.x",
     "@emotion/styled": "^11.11.x",
     "@math.gl/core": "^4.1.0",
-    "@mui/material": "^5.15.x"
+    "@mui/material": "^5.15.x",
+    "@mui/icons-material": ""
   },
   "configSchema": {
     "type": "object",
