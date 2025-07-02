@@ -75,33 +75,57 @@ export default function FireRecorder() {
   };
 
   return (
-    <div style={{ padding: '8px', background:'#ffe3e0', marginTop: '16px', borderRadius:'6px' }}>
-      <h5 style={{ display: 'flex', alignItems: 'center', gap: '8px' }}>
-        Fire Recorder Component Plugin
-        {recording && (
-          <span style={{
-            width: '12px',
-            height: '12px',
-            borderRadius: '50%',
-            backgroundColor: 'red',
-            animation: 'blinker 1s infinite',
-            display: 'inline-block'
-          }} />
-        )}
-      </h5>
-
-      <div style={{ display: 'flex', flexDirection: 'row', gap: '5px' }}>
-        <button onClick={recording ? stopRecording : startRecording}>
-          {recording ? '🛑 Stop Recording' : '🎥 Start Recording'}
+    <div
+      style={{
+        padding: '8px',
+        marginTop: '16px',
+        borderRadius: '6px',
+        marginLeft: 'auto',
+        position: 'absolute',
+        right: '0',
+      }}
+    >
+    {/* Animation and button focus style */}
+    <style>{`
+      @keyframes blinker {
+        100% { opacity: 0; }
+      }
+      button:focus {
+        outline: none;
+      }
+    `}</style>
+  
+      <div style={{ display: 'flex', flexDirection: 'row', alignItems: 'center', gap: '5px' }}>
+        <button
+          style={{
+            backgroundColor: 'white', // override black background
+            borderRadius: '4px',
+            padding: '6px 10px',
+            cursor: 'pointer',
+            color:'Black',
+            display: 'flex',
+            alignItems: 'center',
+            gap: '6px',
+            fontSize: '16px',
+          }}
+          onClick={recording ? stopRecording : startRecording}
+        >
+          {recording ? 'Stop' : '🎥'}
+          {recording && (
+            <span
+              style={{
+                display: 'inline-block',
+                width: '10px',
+                height: '10px',
+                borderRadius: '50%',
+                backgroundColor: 'red',
+                animation: 'blinker 1s linear infinite',
+              }}
+            />
+          )}
         </button>
       </div>
-
-      {/* Add animation style */}
-      <style>{`
-        @keyframes blinker {
-          50% { opacity: 0; }
-        }
-      `}</style>
     </div>
   );
+  
 }
