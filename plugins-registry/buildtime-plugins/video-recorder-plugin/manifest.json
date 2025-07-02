@@ -1,8 +1,8 @@
 {
-    "name": "fire-recorder-plugin",
+    "name": "video-recorder-plugin",
     "version": "1.0.0",
     "description": "Records deck.gl canvas to WebM/GIF",
-    "main": "src/index.tsx",
+    "main": "index.tsx",
     "permissions": ["panels.left.create"],
     "contributes": {
       "panels": {
@@ -16,4 +16,3 @@
       "webm-writer": "^0.3.0"
     }
   }
-  
