@@ -3,6 +3,7 @@ import { ClipExtension } from '@deck.gl/extensions';
 
 export async function createWindLayer({
   timeRangeEnd,
+  dataSource,
   particleCount = 2000,
   speedFactor = 10,
   opacity = 92
@@ -26,7 +27,11 @@ export async function createWindLayer({
       .toString()
       .padStart(2, '0');
 
-    const imageUrl = `https://titiler.xyz/cog/preview.png?rescale=-127,128&url=vrt:///vsicurl/https://noaa-hrrr-bdp-pds.s3.amazonaws.com/hrrr.${runDateStr}/conus/hrrr.t${runHourStr}z.wrfsfcf${forecastHour}.grib2?bands=10,11&format=png`;
+    if (dataSource === "weatherfm") {
+      imageUrl = `https://dev.ghg.center/api/raster/cog/preview.png?url=s3://ghgc-data-store-develop/wind_lev-72_2020-01-01.tif&bidx=1&bidx=2&unscale=false&resampling=nearest&reproject=nearest&max_size=1024&return_mask=true&rescale=-127,128`;
+    } else {
+      imageUrl = `https://titiler.xyz/cog/preview.png?rescale=-127,128&url=vrt:///vsicurl/https://noaa-hrrr-bdp-pds.s3.amazonaws.com/hrrr.${runDateStr}/conus/hrrr.t${runHourStr}z.wrfsfcf${forecastHour}.grib2?bands=10,11&format=png`;
+    }
 
     let image;
 
@@ -41,9 +46,9 @@ export async function createWindLayer({
       image: image,
       imageType: 'VECTOR',
       imageUnscale: [-127, 128],
-      bounds: [-134.1214, 21.1222, -60.8912, 52.6287],
-      clipBounds: [-134.1214, 21.1222, -60.8912, 52.6287],
-      extensions: [new ClipExtension()],
+      // bounds: [-134.1214, 21.1222, -60.8912, 52.6287],
+      // clipBounds: [-134.1214, 21.1222, -60.8912, 52.6287],
+      // extensions: [new ClipExtension()],
       numParticles: particleCount,
       color: [97, 173, 234, 255],
       fadeOpacity: opacity / 100,
