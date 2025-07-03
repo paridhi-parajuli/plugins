@@ -20,6 +20,12 @@
         "format": "date-time",
         "title": "Time Range End"
       },
+      "dataSource": {
+        "type": "string",
+        "enum": ["hrrr", "weatherfm"],
+        "title": "Data Source",
+        "default": "hrrr"
+      },
       "particleCount": {
         "type": "number",
         "default": 2000,
