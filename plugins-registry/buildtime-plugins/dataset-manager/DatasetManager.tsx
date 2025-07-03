@@ -461,7 +461,7 @@ export function DatasetManager({ datasets }: { datasets: Dataset[] }) {
   return (
     <Box sx={{ width: '100%', height: '100%', p: 2, overflowY: 'auto' }}>
       <Typography variant="h6" sx={{ mb: 2, fontWeight: 600, color: 'text.primary' }}>
-        Datasets.
+        Datasets
       </Typography>
 
       <Grid container spacing={2}>
