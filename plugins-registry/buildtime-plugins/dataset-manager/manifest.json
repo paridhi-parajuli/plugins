@@ -3,10 +3,10 @@
   "version": "1.0.0",
   "description": "Manages all available and active datasets",
   "main": "index.tsx",
-  "permissions": ["panels.right.create"],
+  "permissions": ["panels.left.create"],
   "contributes": {
     "panels": {
-      "right": {
+      "left": {
         "component": "DatasetManagerPanelComponent"
       }
     }
