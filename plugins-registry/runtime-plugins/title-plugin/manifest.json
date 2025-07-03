@@ -1,7 +1,7 @@
 {
     "name": "title-plugin",
     "version": "1.0.0",
-    "description": "Title Plugin",
+    "description": "Adds a logo and title to the dashboard",
     "main": "index.js",
     "contributes": {
       "panels": {
