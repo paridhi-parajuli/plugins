@@ -27,6 +27,7 @@ export async function createWindLayer({
       .toString()
       .padStart(2, '0');
 
+    let imageUrl;
     if (dataSource === "weatherfm") {
       imageUrl = `https://dev.ghg.center/api/raster/cog/preview.png?url=s3://ghgc-data-store-develop/wind_lev-72_2020-01-01.tif&bidx=1&bidx=2&unscale=false&resampling=nearest&reproject=nearest&max_size=1024&return_mask=true&rescale=-127,128`;
     } else {
